@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 60" role="img" aria-labelledby="rt-mark-title">
+  <title id="rt-mark-title">Reality Tunnel mark</title>
+  <style>
+    /* Default: visible at rest (always shows even if JS doesn't run) */
+    .rt-ring { opacity: 1; }
+
+    /* Animation only fires when parent has .rt-anim class */
+    .rt-anim .rt-ring {
+      transform-box: fill-box;
+      transform-origin: center;
+      animation: rt-mark-in 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    /* Inside-out reveal order: deepest first, outer last */
+    .rt-anim .rt-r4 { animation-delay: 0.3s; }
+    .rt-anim .rt-r3 { animation-delay: 0.52s; }
+    .rt-anim .rt-r2 { animation-delay: 0.74s; }
+    .rt-anim .rt-r1 { animation-delay: 0.96s; }
+
+    @keyframes rt-mark-in {
+      0%   { opacity: 0; transform: scale(0.4); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rt-anim .rt-ring { animation: none !important; opacity: 1 !important; }
+    }
+  </style>
+  <ellipse class="rt-ring rt-r1" cx="36.12" cy="31.28" rx="20.26" ry="25.08" fill="#6900E9"/>
+  <ellipse class="rt-ring rt-r2" cx="39.15" cy="31.84" rx="16.68" ry="20.64" fill="#00AEEF"/>
+  <ellipse class="rt-ring rt-r3" cx="43.17" cy="31.90" rx="12.21" ry="15.11" fill="#EE9400"/>
+  <ellipse class="rt-ring rt-r4" cx="46.85" cy="32.45" rx="7.83" ry="9.69" fill="#231F20"/>
+</svg>

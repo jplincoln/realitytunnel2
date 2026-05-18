@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 40 680 90" role="img" aria-labelledby="rt-wm-title">
+  <title id="rt-wm-title">Reality Tunnel</title>
+  <g transform="translate(340 100)">
+    <ellipse cx="-14" cy="0" rx="11" ry="24" fill="#5B2A86"/>
+    <ellipse cx="-3" cy="0" rx="7" ry="16" fill="#D9622C"/>
+    <ellipse cx="6" cy="0" rx="4" ry="9" fill="#E8C547"/>
+    <ellipse cx="12" cy="0" rx="1" ry="2.2" fill="currentColor"/>
+  </g>
+  <text x="308" y="110" text-anchor="end" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34" font-weight="400" letter-spacing="11" fill="currentColor">REALITY</text>
+  <text x="372" y="110" text-anchor="start" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="34" font-weight="400" letter-spacing="11" fill="currentColor">TUNNEL</text>
+</svg>
