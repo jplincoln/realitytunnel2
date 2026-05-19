@@ -18,9 +18,6 @@
   <link rel="preload" href="hero_image.webp" as="image" fetchpriority="high" media="(min-width:641px)">
   <link rel="preload" href="fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/geist-mono-latin.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet">
   <style>
 /* Fonts */
 @font-face {
@@ -133,43 +130,16 @@ h4{font-size:30px;letter-spacing:-0.014em;line-height:1.18;}
 .hd-logo-word{font-family:var(--font-display,"Geist","Inter",system-ui,sans-serif);font-size:28px;font-weight:400;letter-spacing:0.32em;color:currentColor;white-space:nowrap;}
 .hd-logo-tag{font-family:var(--font-display,"Geist","Inter",system-ui,sans-serif);font-size:11px;font-weight:400;letter-spacing:0.45em;color:#555;white-space:nowrap;}
 .hd-logo .hd-logo-word,.hd-logo .hd-logo-tag{opacity:1;}
-
-/* === Mark entrance: B1 Forward Approach (deepest point first, rings grow outward) === */
-.rt-anim .hd-logo-mark .rt-ring{transform-box:fill-box;transform-origin:center;}
-.rt-anim .hd-logo-mark .rt-r4{animation:rt-mark-in 1.0s cubic-bezier(0.22,1,0.36,1) 0.0s both, rt-float-4 7.3s ease-in-out 1.4s infinite, rt-pulse-4 4.9s ease-in-out 1.4s infinite;}
-.rt-anim .hd-logo-mark .rt-r3{animation:rt-mark-in 1.0s cubic-bezier(0.22,1,0.36,1) 0.18s both, rt-stretch-3 6.1s ease-in-out 1.4s infinite, rt-pulse-3 3.8s ease-in-out 1.4s infinite;}
-.rt-anim .hd-logo-mark .rt-r2{animation:rt-mark-in 1.0s cubic-bezier(0.22,1,0.36,1) 0.36s both, rt-rotate-2 5.3s ease-in-out 1.4s infinite, rt-pulse-2 3.1s ease-in-out 1.4s infinite;}
-.rt-anim .hd-logo-mark .rt-r1{animation:rt-mark-in 1.0s cubic-bezier(0.22,1,0.36,1) 0.54s both, rt-scale-1 4.7s ease-in-out 1.4s infinite, rt-pulse-1 5.9s ease-in-out 1.4s infinite;}
-
-.rt-anim .hd-logo-word{opacity:0;animation:rt-text-in 0.7s ease-out 1.7s both;}
-.rt-anim .hd-logo-tag{opacity:0;animation:rt-text-in 0.7s ease-out 2.0s both;}
-
-@keyframes rt-mark-in{0%{opacity:0;transform:scale(0.15);}30%{opacity:1;}100%{opacity:1;transform:scale(1);}}
+.rt-anim .hd-logo-mark .rt-ring{transform-box:fill-box;transform-origin:center;animation:rt-mark-in 0.55s cubic-bezier(0.22,1,0.36,1) both;}
+.rt-anim .hd-logo-mark .rt-r4{animation-delay:0.3s;}
+.rt-anim .hd-logo-mark .rt-r3{animation-delay:0.52s;}
+.rt-anim .hd-logo-mark .rt-r2{animation-delay:0.74s;}
+.rt-anim .hd-logo-mark .rt-r1{animation-delay:0.96s;}
+.rt-anim .hd-logo-word{opacity:0;animation:rt-text-in 0.7s ease-out 1.4s both;}
+.rt-anim .hd-logo-tag{opacity:0;animation:rt-text-in 0.7s ease-out 1.75s both;}
+@keyframes rt-mark-in{0%{opacity:0;transform:scale(0.4);}100%{opacity:1;transform:scale(1);}}
 @keyframes rt-text-in{0%{opacity:0;transform:translateY(4px);}100%{opacity:1;transform:translateY(0);}}
-
-/* Perpetual oscillation: each ring has TWO motion types on independent periods */
-/* Ring 1 (purple, outer): scale breath + brightness pulse */
-@keyframes rt-scale-1{0%,100%{transform:scale(1);}50%{transform:scale(1.04);}}
-@keyframes rt-pulse-1{0%,100%{filter:brightness(1);}50%{filter:brightness(1.15);}}
-/* Ring 2 (cyan): rotation + brightness dim */
-@keyframes rt-rotate-2{0%,100%{transform:rotate(0);}50%{transform:rotate(-2deg);}}
-@keyframes rt-pulse-2{0%,100%{filter:brightness(1);}50%{filter:brightness(0.85);}}
-/* Ring 3 (orange): asymmetric stretch + brightness pulse */
-@keyframes rt-stretch-3{0%,100%{transform:scale(1,1);}50%{transform:scale(1.06,0.94);}}
-@keyframes rt-pulse-3{0%,100%{filter:brightness(1);}50%{filter:brightness(1.2);}}
-/* Ring 4 (terracotta, inner): position drift + brightness dim */
-@keyframes rt-float-4{0%,100%{transform:translate(0,0);}50%{transform:translate(2px,1.5px);}}
-@keyframes rt-pulse-4{0%,100%{filter:brightness(1);}50%{filter:brightness(0.78);}}
-
-/* Pause perpetual motion when tab is hidden (saves battery) */
-.hd-logo-mark.paused .rt-ring{animation-play-state:paused!important;}
-
-/* Reduced motion: disable everything (rings render in resting state) */
-@media (prefers-reduced-motion: reduce){
-  .rt-anim .hd-logo-mark .rt-ring,
-  .rt-anim .hd-logo-word,
-  .rt-anim .hd-logo-tag{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;}
-}
+@media (prefers-reduced-motion: reduce){.rt-anim .hd-logo-mark .rt-ring,.rt-anim .hd-logo-word,.rt-anim .hd-logo-tag{animation:none!important;opacity:1!important;transform:none!important;}}
 .hd-nav{display:flex;gap:4px;justify-self:center;}
 .hd-nav a{font-size:14px;font-weight:600;color:var(--ink-700);padding:8px 14px;border-radius:6px;transition:background 160ms,color 160ms;}
 .hd-nav a:hover{background:var(--ink-100);color:var(--ink-1000);}
@@ -189,86 +159,9 @@ h4{font-size:30px;letter-spacing:-0.014em;line-height:1.18;}
 .hero-media{position:relative;max-width:540px;}
 .hero-media img{width:100%;height:auto;display:block;object-fit:cover;border-radius:20px;}
 .hero h1{font-size:clamp(36px,4.8vw,80px);font-weight:700;line-height:0.98;letter-spacing:-0.03em;margin:24px 0;text-wrap:balance;}
-.hero h1 .accent{color:#fe5828;display:inline-block;}
+.hero h1 .accent{color:#fe5828;}
 .hero .eyebrow{color:#b8350b;}
 .hero .eyebrow::before{background:#fe5828;}
-
-/* === Reusable scroll-triggered word animations ===
-   Add class to a span to set the animation type, then add .rt-on-scroll
-   for IntersectionObserver gating (or .rt-play directly to fire immediately).
-   The hero accent uses .rt-rise and fires on load via .rt-anim on body. */
-.rt-rise, .rt-slide-left, .rt-oblique, .rt-glitch {
-  display: inline-block;
-  will-change: transform, opacity;
-}
-
-/* RISE: ease in from below */
-.rt-on-scroll.rt-rise { opacity: 0; transform: translateY(0.5em); }
-.rt-on-scroll.rt-rise.rt-play {
-  animation: rt-anim-rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-@keyframes rt-anim-rise {
-  0%   { opacity: 0; transform: translateY(0.5em); }
-  100% { opacity: 1; transform: translateY(0); }
-}
-
-/* SLIDE-LEFT: ease in from the right */
-.rt-on-scroll.rt-slide-left { opacity: 0; transform: translateX(0.6em); }
-.rt-on-scroll.rt-slide-left.rt-play {
-  animation: rt-anim-slide-left 1.0s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-@keyframes rt-anim-slide-left {
-  0%   { opacity: 0; transform: translateX(0.6em); }
-  100% { opacity: 1; transform: translateX(0); }
-}
-
-/* OBLIQUE: resting → tilt forward → resting again (with brief skew) */
-.rt-on-scroll.rt-oblique.rt-play {
-  animation: rt-anim-oblique 1.6s cubic-bezier(0.4, 0, 0.2, 1) both;
-}
-@keyframes rt-anim-oblique {
-  0%   { transform: skewX(0); }
-  35%  { transform: skewX(-14deg); }
-  70%  { transform: skewX(3deg); }
-  100% { transform: skewX(0); }
-}
-
-/* GLITCH: jittery snap-in with brief flicker — the "no surprises" surprise */
-.rt-on-scroll.rt-glitch { opacity: 0; }
-.rt-on-scroll.rt-glitch.rt-play {
-  animation: rt-anim-glitch 0.8s steps(10, end) both;
-}
-@keyframes rt-anim-glitch {
-  0%   { opacity: 0;   transform: translate(0, 0); }
-  10%  { opacity: 1;   transform: translate(-6px, 2px) skewX(8deg); }
-  20%  { opacity: 0.3; transform: translate(5px, -3px); }
-  30%  { opacity: 1;   transform: translate(-3px, 3px) skewX(-5deg); }
-  40%  { opacity: 0.6; transform: translate(4px, -1px); }
-  50%  { opacity: 1;   transform: translate(-2px, 1px) skewX(2deg); }
-  60%  { opacity: 0.8; transform: translate(1px, -1px); }
-  70%  { opacity: 1;   transform: translate(-1px, 0); }
-  85%  { opacity: 1;   transform: translate(0.5px, 0); }
-  100% { opacity: 1;   transform: translate(0, 0) skewX(0); }
-}
-
-/* Hero accent on page load: backwards compatible — still triggers via .rt-anim */
-.hero h1 .accent {
-  display: inline-block;
-  will-change: transform, opacity;
-}
-.rt-anim .hero h1 .accent {
-  animation: rt-anim-rise 1.1s cubic-bezier(0.22, 1, 0.36, 1) 1.2s both;
-}
-
-@media (prefers-reduced-motion: reduce){
-  .rt-on-scroll.rt-rise, .rt-on-scroll.rt-slide-left,
-  .rt-on-scroll.rt-oblique, .rt-on-scroll.rt-glitch,
-  .rt-anim .hero h1 .accent {
-    animation: none !important;
-    opacity: 1 !important;
-    transform: none !important;
-  }
-}
 .hero .lead{color:var(--ink-600);font-size:18.5px;max-width:52ch;margin-bottom:32px;}
 .hero-cta{display:flex;gap:10px;flex-wrap:wrap;}
 .hero-trust{display:flex;gap:24px;margin-top:48px;padding-top:24px;border-top:1px solid var(--border);flex-wrap:wrap;}
@@ -326,77 +219,14 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
 .approach-step h3{font-size:22px;margin-bottom:6px;font-weight:600;letter-spacing:-0.012em;line-height:1.2;}
 .approach-step p{color:var(--ink-600);font-size:14.5px;line-height:1.55;max-width:50ch;}
 
-/* Origin (Reality Tunnel name story) */
-.origin{padding:120px 0;background:#6900E9;color:#f5efff;position:relative;overflow:hidden;isolation:isolate;}
-
-/* Animated mesh gradient — five soft color blobs drifting on independent loops.
-   isolation:isolate above creates a stacking context so the mesh's blend
-   modes don't bleed into siblings (e.g. into the testimonials below). */
-.origin-mesh{position:absolute;inset:-15%;z-index:0;pointer-events:none;filter:blur(70px);opacity:0.85;}
-.origin-blob{position:absolute;border-radius:50%;mix-blend-mode:screen;will-change:transform;}
-.origin-blob-1{width:55%;height:55%;background:#005a87;top:-10%;left:-5%;animation:mesh-drift-1 40s ease-in-out infinite;}
-.origin-blob-2{width:42%;height:42%;background:#c43a14;top:5%;left:5%;animation:mesh-drift-2 50s ease-in-out infinite;}
-.origin-blob-3{width:45%;height:45%;background:#1a0440;top:20%;left:40%;animation:mesh-drift-4 45s ease-in-out infinite;mix-blend-mode:multiply;opacity:0.85;}
-.origin-blob-4{width:40%;height:40%;background:#3d0f6b;bottom:-15%;left:25%;animation:mesh-drift-3 60s ease-in-out infinite;mix-blend-mode:multiply;opacity:0.7;}
-.origin-blob-5{width:35%;height:35%;background:#5e1e9c;bottom:10%;right:30%;animation:mesh-drift-5 53s ease-in-out infinite;mix-blend-mode:multiply;opacity:0.65;}
-
-@keyframes mesh-drift-1{
-  0%,100%{transform:translate(0,0) scale(1);}
-  33%{transform:translate(18%,12%) scale(1.15);}
-  66%{transform:translate(-8%,22%) scale(0.9);}
-}
-@keyframes mesh-drift-2{
-  0%,100%{transform:translate(0,0) scale(1);}
-  25%{transform:translate(120%,20%) scale(1.1);}
-  50%{transform:translate(80%,90%) scale(0.95);}
-  75%{transform:translate(-10%,80%) scale(1.05);}
-}
-@keyframes mesh-drift-3{
-  0%,100%{transform:translate(0,0) scale(1);}
-  50%{transform:translate(12%,-25%) scale(1.2);}
-}
-@keyframes mesh-drift-4{
-  0%,100%{transform:translate(0,0) scale(1);}
-  35%{transform:translate(-20%,15%) scale(0.85);}
-  70%{transform:translate(10%,-10%) scale(1.1);}
-}
-@keyframes mesh-drift-5{
-  0%,100%{transform:translate(0,0) scale(1);}
-  45%{transform:translate(-18%,-12%) scale(1.25);}
-  80%{transform:translate(22%,18%) scale(0.95);}
-}
-
-/* Pause when tab is hidden */
-.origin-mesh.paused .origin-blob{animation-play-state:paused!important;}
-
-/* Reduced motion: hold blobs in their starting positions, no movement */
-@media (prefers-reduced-motion: reduce){
-  .origin-blob{animation:none!important;}
-}
-
-.origin-inner{max-width:780px;margin:0 auto;padding:0 32px;position:relative;z-index:1;}
-.origin-eyebrow{font-family:var(--font-mono);font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#d9c4ff;margin-bottom:32px;display:inline-flex;align-items:center;gap:10px;}
-.origin-eyebrow::before{content:"";width:6px;height:6px;background:#fe5828;border-radius:999px;}
-.origin-title{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;font-weight:500;font-size:clamp(40px,5vw,68px);line-height:1.02;letter-spacing:-0.02em;margin:0 0 40px;color:#ffffff;text-wrap:balance;}
-.origin-title em{font-style:italic;font-weight:400;color:#ffd5a8;}
-.origin-body{font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;font-weight:400;font-size:clamp(18px,1.7vw,22px);line-height:1.55;letter-spacing:-0.005em;color:#f5efff;max-width:62ch;}
-.origin-body p{margin:0 0 1.2em;}
-.origin-body p:last-child{margin-bottom:0;}
-.origin-body em{font-style:italic;color:#ffd5a8;}
-@media (max-width:640px){
-  .origin{padding:80px 0;}
-  .origin-inner{padding:0 20px;}
-  .origin-body{font-size:17px;line-height:1.6;}
-}
-
 /* Testimonials */
 .testi{padding:72px 0;}
 .testi-framing{max-width:920px;margin:0 auto 24px;display:flex;flex-direction:column;gap:8px;}
 .testi-note{margin:0;color:var(--ink-600);font-size:14px;font-style:italic;}
 .testi-card{border:1px solid var(--border);border-radius:14px;padding:64px 56px;background:var(--white);max-width:920px;margin:0 auto;}
-.testi-card blockquote{margin:0;padding:0;border:0;font-family:"Fraunces",Georgia,serif;font-optical-sizing:auto;font-size:clamp(16px,1.7vw,21px);line-height:1.55;letter-spacing:-0.006em;font-weight:400;color:#5a5a66;text-wrap:balance;font-style:italic;min-height:7em;}
-.testi-card blockquote::before{content:"\201C";color:currentColor;margin-right:4px;}
-.testi-card blockquote::after{content:"\201D";color:currentColor;}
+.testi-card blockquote{margin:0;padding:0;border:0;font-size:clamp(15px,1.6vw,19px);line-height:1.65;letter-spacing:-0.006em;font-weight:400;color:var(--ink-1000);text-wrap:balance;font-style:italic;min-height:7em;}
+.testi-card blockquote::before{content:"\201C";color:var(--accent);margin-right:4px;}
+.testi-card blockquote::after{content:"\201D";color:var(--accent);}
 .testi-foot{display:flex;align-items:center;gap:14px;margin-top:32px;padding-top:24px;border-top:1px solid var(--border);}
 .testi-foot img{width:56px;height:56px;border-radius:999px;background:var(--ink-100);object-fit:cover;}
 .testi-foot .who strong{font-size:14.5px;font-weight:600;color:var(--ink-1000);display:block;}
@@ -457,47 +287,13 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
 
 /* Footer */
 .ft{background:#fff;border-top:1px solid var(--border);padding:64px 0 32px;}
-.ft-grid{display:grid;grid-template-columns:2.4fr 0.7fr 0.7fr 0.7fr;gap:16px;padding-bottom:48px;border-bottom:1px solid var(--border);}
-.ft-brand{align-self:center;}
-.ft-logo{display:inline-flex;align-items:center;gap:0;}
-.ft-logo-mark{display:block;flex:0 0 auto;width:104px;height:78px;}
-.ft-logo-mark svg{display:block;width:100%;height:100%;overflow:visible;}
-.ft-logo-text{display:inline-flex;flex-direction:column;align-items:flex-start;line-height:1;gap:6px;}
-.ft-logo-word{font-family:var(--font-display,"Geist","Inter",system-ui,sans-serif);font-size:28px;font-weight:400;letter-spacing:0.32em;color:var(--ink-1000);white-space:nowrap;}
-.ft-logo-tag{font-family:var(--font-display,"Geist","Inter",system-ui,sans-serif);font-size:11px;font-weight:400;letter-spacing:0.45em;color:#555;white-space:nowrap;}
+.ft-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid var(--border);}
+.ft-brand img{height:24px;width:auto;margin-bottom:16px;}
+.ft-brand p{color:var(--ink-600);font-size:14px;max-width:32ch;}
 .ft h3{font-family:var(--font-mono);font-size:11.5px;color:var(--accent-ink);font-weight:500;margin-bottom:14px;}
 .ft a{color:var(--ink-700);font-size:14px;padding:4px 0;display:inline-block;transition:color 160ms;}
 .ft a:hover{color:var(--ink-1000);}
 .ft li{margin-bottom:2px;}
-/* === Footer logo entrance + oscillation: triggered when footer scrolls into view via .ft-anim === */
-.ft-logo .ft-logo-word,.ft-logo .ft-logo-tag{opacity:1;}
-.ft-logo .ft-logo-mark .rt-ring{transform-box:fill-box;transform-origin:center;}
-
-/* Before scroll-trigger: hide everything so animation can build it up */
-.ft-logo-mark:not(.ft-anim) .rt-ring{opacity:0;}
-.ft-logo:not(.ft-anim) .ft-logo-word,
-.ft-logo:not(.ft-anim) .ft-logo-tag{opacity:0;}
-
-/* When .ft-anim is added on scroll, fire B1 entrance + oscillation */
-.ft-logo-mark.ft-anim .rt-r4{animation:rt-mark-in 1.0s cubic-bezier(0.22,1,0.36,1) 0.0s both, rt-float-4 7.3s ease-in-out 1.4s infinite, rt-pulse-4 4.9s ease-in-out 1.4s infinite;}
-.ft-logo-mark.ft-anim .rt-r3{animation:rt-mark-in 1.0s cubic-bezier(0.22,1,0.36,1) 0.18s both, rt-stretch-3 6.1s ease-in-out 1.4s infinite, rt-pulse-3 3.8s ease-in-out 1.4s infinite;}
-.ft-logo-mark.ft-anim .rt-r2{animation:rt-mark-in 1.0s cubic-bezier(0.22,1,0.36,1) 0.36s both, rt-rotate-2 5.3s ease-in-out 1.4s infinite, rt-pulse-2 3.1s ease-in-out 1.4s infinite;}
-.ft-logo-mark.ft-anim .rt-r1{animation:rt-mark-in 1.0s cubic-bezier(0.22,1,0.36,1) 0.54s both, rt-scale-1 4.7s ease-in-out 1.4s infinite, rt-pulse-1 5.9s ease-in-out 1.4s infinite;}
-.ft-logo.ft-anim .ft-logo-word{animation:rt-text-in 0.7s ease-out 1.7s both;}
-.ft-logo.ft-anim .ft-logo-tag{animation:rt-text-in 0.7s ease-out 2.0s both;}
-
-/* Pause perpetual motion when tab is hidden */
-.ft-logo-mark.paused .rt-ring{animation-play-state:paused!important;}
-
-@media (prefers-reduced-motion: reduce){
-  .ft-logo-mark:not(.ft-anim) .rt-ring,
-  .ft-logo:not(.ft-anim) .ft-logo-word,
-  .ft-logo:not(.ft-anim) .ft-logo-tag,
-  .ft-logo-mark.ft-anim .rt-ring,
-  .ft-logo.ft-anim .ft-logo-word,
-  .ft-logo.ft-anim .ft-logo-tag{animation:none!important;opacity:1!important;transform:none!important;filter:none!important;}
-}
-
 .ft-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:24px;font-family:var(--font-mono);font-size:12px;color:var(--ink-500);}
 
 /* Responsive */
@@ -692,8 +488,8 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
       <div class="container">
         <div class="section-head">
           <span class="eyebrow">services</span>
-          <h2>Six practices.<br>One delivery <em><span class="rt-on-scroll rt-slide-left">team</span></em>.</h2>
-          <p class="lead">A single roadmap, owned by senior engineers and 3D artists who have shipped together for over a decade.</p>
+          <h2>Six practices.<br>One delivery <em>team</em>.</h2>
+          <p class="lead">A single roadmap, owned by senior engineers and 3D artists who have shipped together for a decade.</p>
         </div>
         <ol class="svc-grid" role="list">
           <li class="svc-card"><span class="svc-num">01 / 06</span><h3>Augmented reality</h3><p>Face filters, product try-on, on-set markers — shipped to web, iOS, Android, in-store.</p><span class="arrow">Learn more →</span></li>
@@ -711,7 +507,7 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
         <div class="work-head">
           <div class="section-head" style="margin-bottom:0">
             <span class="eyebrow">selected work</span>
-            <h2>Built with brands<br>that need to <em><span class="rt-on-scroll rt-oblique">move metrics</span></em>.</h2>
+            <h2>Built with brands<br>that need to <em>move metrics</em>.</h2>
           </div>
           <a href="#contact" class="btn btn--ghost">All projects</a>
         </div>
@@ -748,7 +544,7 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
             <span class="proj-meta">
               <span class="proj-tag">AR · computer vision</span>
               <span class="proj-title">Talentolandia</span>
-              <span class="proj-sub">Character recognition for kids&rsquo; learning.</span>
+              <span class="proj-sub">Character recognition for kids' learning.</span>
               <span class="proj-client"><strong>Client:</strong> Talentolandia</span>
             </span>
           </a></li>
@@ -756,7 +552,7 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
             <span class="proj-thumb"></span>
             <span class="proj-meta">
               <span class="proj-tag">VR training</span>
-              <span class="proj-title">Hacker&rsquo;s Worst Nightmare</span>
+              <span class="proj-title">Hacker's Worst Nightmare</span>
               <span class="proj-sub">Cyber-security training in immersive VR.</span>
               <span class="proj-client"><strong>Client:</strong> Confidential</span>
             </span>
@@ -779,8 +575,8 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
         <div class="approach-grid">
           <div>
             <span class="eyebrow">approach</span>
-            <h2 style="font-size:clamp(36px,4vw,52px);letter-spacing:-0.022em;line-height:1.05;margin-top:12px;font-weight:700">Four phases. <span class="rt-on-scroll rt-glitch" style="color:#E64612">No surprises.</span></h2>
-            <p class="lead" style="margin-top:16px;color:#4B4B57;max-width:44ch">Every engagement runs the same way — so your CFO and CTO know what they&rsquo;re signing.</p>
+            <h2 style="font-size:clamp(36px,4vw,52px);letter-spacing:-0.022em;line-height:1.05;margin-top:12px;font-weight:700">Four phases. <span style="color:#E64612">No surprises.</span></h2>
+            <p class="lead" style="margin-top:16px;color:#4B4B57;max-width:44ch">Every engagement runs the same way — so your CFO and CTO know what they're signing.</p>
           </div>
           <div class="approach-list">
             <div class="approach-step"><span class="n">01</span><div><h3>Discover</h3><p>Two-week paid discovery with your stakeholders. We leave with a shaped scope, a budget, and a rollout plan.</p></div></div>
@@ -788,24 +584,6 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
             <div class="approach-step"><span class="n">03</span><div><h3>Build</h3><p>Senior team, fixed-price sprints, daily Loom updates. We ship in production-grade code from day one.</p></div></div>
             <div class="approach-step"><span class="n">04</span><div><h3>Operate</h3><p>On-site operators for events, tier-1 SLA for retail, analytics dashboards integrated into your stack.</p></div></div>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="origin" id="origin">
-      <div class="origin-mesh" aria-hidden="true">
-        <span class="origin-blob origin-blob-1"></span>
-        <span class="origin-blob origin-blob-2"></span>
-        <span class="origin-blob origin-blob-3"></span>
-        <span class="origin-blob origin-blob-4"></span>
-        <span class="origin-blob origin-blob-5"></span>
-      </div>
-      <div class="origin-inner">
-        <span class="origin-eyebrow">about the name</span>
-        <h2 class="origin-title">Why we&rsquo;re called <span class="rt-on-scroll rt-rise"><em>Reality Tunnel</em></span>.</h2>
-        <div class="origin-body">
-          <p>The phrase <em>Reality Tunnel</em> was coined by writer and futurist Robert Anton Wilson in the 1980s, building on Timothy Leary&rsquo;s earlier work on the eight-circuit model of consciousness. Wilson&rsquo;s idea is deceptively simple: every person inhabits a unique perceptual reality shaped by their language, beliefs, conditioning, and senses — a &ldquo;tunnel&rdquo; of interpretation through which the world reaches them. No two people see the same world; we all navigate slightly different versions of it. The metaphor stuck because it captures something true about human experience: reality is not received, it&rsquo;s constructed.</p>
-          <p>That premise sits at the heart of what we do. When we build augmented reality, virtual reality, and 3D experiences, we&rsquo;re designing new tunnels — deliberate, crafted environments that change how people perceive a product, a place, a story, or each other. Our work is the practical application of Wilson&rsquo;s insight: if perception can be reshaped, then experience can be designed. Every project we ship is a tunnel built with intention, taking customers somewhere their default reality doesn&rsquo;t reach, and leaving them with something they&rsquo;ll remember and act on.</p>
         </div>
       </div>
     </section>
@@ -943,8 +721,8 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
       <div class="container contact-grid">
         <div>
           <span class="eyebrow">start a project</span>
-          <h2 style="margin-top:12px">Tell us what you<br>want to build <em><span class="rt-on-scroll rt-oblique">next</span></em>.</h2>
-          <p class="lead">A 30-minute call, a written brief, or a Figma — whichever is easiest. We&rsquo;ll come back within one business day with a shaped scope.</p>
+          <h2 style="margin-top:12px">Tell us what you<br>want to build <em>next</em>.</h2>
+          <p class="lead">A 30-minute call, a written brief, or a Figma — whichever is easiest. We'll come back within one business day with a shaped scope.</p>
           <ul class="contact-meta" aria-label="Contact information">
             <li><span class="cm-label">Email</span><a href="mailto:contact@realitytunnel.ai">contact@realitytunnel.ai</a></li>
             <li><span class="cm-label">Phone</span><a href="tel:+51958967616">+51 958 967 616</a></li>
@@ -988,20 +766,8 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
     <div class="container">
       <div class="ft-grid">
         <div class="ft-brand">
-          <div class="ft-logo">
-            <span class="ft-logo-mark" aria-hidden="true">
-              <svg viewBox="0 0 80 60" xmlns="http://www.w3.org/2000/svg">
-                <ellipse class="rt-ring rt-r1" cx="49.74" cy="31.28" rx="20.26" ry="25.08" fill="#6900E9"/>
-                <ellipse class="rt-ring rt-r2" cx="52.77" cy="31.84" rx="16.68" ry="20.64" fill="#00AEEF"/>
-                <ellipse class="rt-ring rt-r3" cx="56.79" cy="31.90" rx="12.21" ry="15.11" fill="#fe5828"/>
-                <ellipse class="rt-ring rt-r4" cx="60.47" cy="32.45" rx="7.83" ry="9.69" fill="#8c3622"/>
-              </svg>
-            </span>
-            <span class="ft-logo-text">
-              <span class="ft-logo-word">REALITY TUNNEL</span>
-              <span class="ft-logo-tag">IMMERSIVE EXPERIENCES STUDIO</span>
-            </span>
-          </div>
+          <img src="favicon.svg" alt="Reality Tunnel" width="88" height="88">
+          <p>Immersive technology, end-to-end, since 2014.</p>
         </div>
         <nav aria-label="Studio"><h3>studio</h3><ul>
           <li><a href="#work">Work</a></li>
@@ -1022,99 +788,35 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
           <li><a href="#">YouTube</a></li>
         </ul></nav>
       </div>
-      <div class="ft-foot"><span>© 2026 Reality Tunnel</span><span>US · Lima · LATAM</span></div>
+      <div class="ft-foot"><span>© 2026 Reality Tunnel</span><span>Lima · LATAM · US</span></div>
     </div>
   </footer>
 
   <script>
-  // Logo animation: plays on every page load.
-  // Includes pause-on-tab-hidden to save battery during perpetual oscillation.
+  // Logo animation: play once per browser session in production.
+  // For local development (file:// or localhost) it always plays.
+  // For testing on a deployed site, append ?replay or #replay to the URL.
   (function(){
-    var logo = document.querySelector('.hd-logo');
-    var mark = document.querySelector('.hd-logo-mark');
-    if (logo) logo.classList.add('rt-anim');
-    // Also flag the body so other one-shot intro animations can scope to .rt-anim
-    document.body.classList.add('rt-anim');
-
-    // Pause oscillation when tab is hidden, resume when visible
-    if (mark && typeof document.hidden !== 'undefined') {
-      document.addEventListener('visibilitychange', function(){
-        if (document.hidden) mark.classList.add('paused');
-        else mark.classList.remove('paused');
-      });
+    function playAnim() {
+      var logo = document.querySelector('.hd-logo');
+      if (logo) logo.classList.add('rt-anim');
     }
-  })();
-
-  // Origin section animated mesh: pause when tab hidden
-  (function(){
-    var mesh = document.querySelector('.origin-mesh');
-    if (!mesh || typeof document.hidden === 'undefined') return;
-    document.addEventListener('visibilitychange', function(){
-      if (document.hidden) mesh.classList.add('paused');
-      else mesh.classList.remove('paused');
-    });
-  })();
-
-  // Footer logo: fires the same entrance + oscillation when scrolled into view
-  (function(){
-    var footerLogo = document.querySelector('.ft-logo');
-    var footerMark = document.querySelector('.ft-logo-mark');
-    if (!footerLogo || !footerMark) return;
-
-    function playFooter(){
-      footerLogo.classList.add('ft-anim');
-      footerMark.classList.add('ft-anim');
+    var loc = window.location;
+    var isLocal = loc.protocol === 'file:' ||
+                  loc.hostname === 'localhost' ||
+                  loc.hostname === '127.0.0.1' ||
+                  loc.hostname === '';
+    var force = isLocal || /[?#]replay\b/.test(loc.href);
+    try {
+      var key = 'rt-logo-played';
+      if (force || !sessionStorage.getItem(key)) {
+        playAnim();
+        if (!force) sessionStorage.setItem(key, '1');
+      }
+    } catch(e) {
+      // sessionStorage blocked — just play it
+      playAnim();
     }
-
-    // No IntersectionObserver fallback: play immediately
-    if (typeof IntersectionObserver === 'undefined') {
-      playFooter();
-      return;
-    }
-
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting) {
-          playFooter();
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.4 });
-    obs.observe(footerLogo);
-
-    // Pause footer oscillation when tab is hidden too
-    if (typeof document.hidden !== 'undefined') {
-      document.addEventListener('visibilitychange', function(){
-        if (document.hidden) footerMark.classList.add('paused');
-        else footerMark.classList.remove('paused');
-      });
-    }
-  })();
-
-  // Scroll-triggered word animations: fire .rt-play on .rt-on-scroll elements when they enter the viewport
-  (function(){
-    var targets = document.querySelectorAll('.rt-on-scroll');
-    if (!targets.length) return;
-
-    // Fallback for browsers without IntersectionObserver: play all immediately
-    if (typeof IntersectionObserver === 'undefined') {
-      targets.forEach(function(el){ el.classList.add('rt-play'); });
-      return;
-    }
-
-    var obs = new IntersectionObserver(function(entries){
-      entries.forEach(function(entry){
-        if (entry.isIntersecting) {
-          entry.target.classList.add('rt-play');
-          obs.unobserve(entry.target); // fire once per element
-        }
-      });
-    }, {
-      threshold: 0.5,           // fires when 50% of the word is visible
-      rootMargin: '0px 0px -10% 0px' // bias trigger slightly above the bottom edge
-    });
-
-    targets.forEach(function(el){ obs.observe(el); });
   })();
 
   // Hamburger
@@ -1145,8 +847,8 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
   (function() {
     var quotes = [
       {t:"I have worked with Carlos and his team for over a decade. From full-stack Web development, AR/VR work and apps, you could not be in better hands. They deliver on time and on budget and have never let me down.", who:"JP Lincoln", role:"President, Crier PR", img:"clients-testimonials/jp_lincoln.png"},
-      {t:"The final product met the end client’s expectations and effectively boosted their customer engagement. Next was a collaborative partner, utilizing various tools to communicate with the client and track their tasks. They were flexible and understanding of scope changes.", who:"Kavita Joshi", role:"COO, Simplyaugmented Inc.", img:"clients-testimonials/kavita_yoshi.png"},
-      {t:"Next is very methodical about their work and operates in sprints. They communicate with the client about upcoming deadlines and expected delays. They’re committed to excellence and their team often proposes new approaches to ongoing processes to improve the final product.", who:"Lisa Furfine", role:"CEO, Bogotash LLC", img:"clients-testimonials/lisa_furfine.png"},
+      {t:"The final product met the end client's expectations and effectively boosted their customer engagement. Next was a collaborative partner, utilizing various tools to communicate with the client and track their tasks. They were flexible and understanding of scope changes.", who:"Kavita Joshi", role:"COO, Simplyaugmented Inc.", img:"clients-testimonials/kavita_yoshi.png"},
+      {t:"Next is very methodical about their work and operates in sprints. They communicate with the client about upcoming deadlines and expected delays. They're committed to excellence and their team often proposes new approaches to ongoing processes to improve the final product.", who:"Lisa Furfine", role:"CEO, Bogotash LLC", img:"clients-testimonials/lisa_furfine.png"},
       {t:"Carlos and his firm are the utmost professionals. They are responsive, hard working, solution driven and cost effective. We have worked with many IT firms and Next stands out as a true gem. I rely on him for all my IT needs.", who:"Susan Woods", role:"CEO, The Woods & Co", img:"clients-testimonials/susan_woods.png"}
     ];
     var current = 0, timer;
