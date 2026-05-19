@@ -134,14 +134,32 @@ h4{font-size:30px;letter-spacing:-0.014em;line-height:1.18;}
 .hd-logo-tag{font-family:var(--font-display,"Geist","Inter",system-ui,sans-serif);font-size:11px;font-weight:400;letter-spacing:0.45em;color:#555;white-space:nowrap;}
 .hd-logo .hd-logo-word,.hd-logo .hd-logo-tag{opacity:1;}
 
-/* Wordmark and tagline fade in after the mark's self-contained entrance */
-.rt-anim .hd-logo-word{opacity:0;animation:rt-text-in 0.7s ease-out 1.5s both;}
-.rt-anim .hd-logo-tag{opacity:0;animation:rt-text-in 0.7s ease-out 1.8s both;}
-@keyframes rt-text-in{0%{opacity:0;transform:translateY(4px);}100%{opacity:1;transform:translateY(0);}}
+/* === V9 wormhole-eject: letters fly in from randomized scattered positions ===
+   The .hd-logo-word and .hd-logo-tag are split into per-letter spans by JS at load.
+   Each .ch span gets randomized --from (translate) and --rot (rotation) CSS variables.
+   Stagger between letters is applied via per-letter animation-delay set in JS. */
+.hd-logo-word, .hd-logo-tag { transform-style: preserve-3d; }
+.hd-logo-word .ch, .hd-logo-tag .ch { display: inline-block; opacity: 1; will-change: transform, opacity, filter; }
+.hd-logo-word .sp { display: inline-block; width: 0.35em; }
+.hd-logo-tag .sp { display: inline-block; width: 0.4em; }
+
+/* Hide all letters until .rt-anim fires (prevents flash of fully-formed text on load) */
+.hd-logo:not(.rt-anim) .hd-logo-word .ch,
+.hd-logo:not(.rt-anim) .hd-logo-tag .ch { opacity: 0; }
+
+.rt-anim .hd-logo-word .ch { animation: rt-eject 0.85s cubic-bezier(0.34, 1.2, 0.5, 1) both; }
+.rt-anim .hd-logo-tag .ch  { animation: rt-eject 0.6s cubic-bezier(0.34, 1.2, 0.5, 1) both; }
+
+@keyframes rt-eject {
+  0%   { opacity: 0; transform: var(--from, translate(0,0)) scale(0.1) rotate(var(--rot, 0deg)); filter: blur(6px) brightness(2); }
+  40%  { opacity: 1; filter: blur(3px) brightness(1.5); }
+  100% { opacity: 1; transform: translate(0,0) scale(1) rotate(0); filter: blur(0) brightness(1); }
+}
 
 @media (prefers-reduced-motion: reduce){
-  .rt-anim .hd-logo-word,
-  .rt-anim .hd-logo-tag{animation:none!important;opacity:1!important;transform:none!important;}
+  .hd-logo-word .ch, .hd-logo-tag .ch { animation: none !important; opacity: 1 !important; transform: none !important; filter: none !important; }
+  .hd-logo:not(.rt-anim) .hd-logo-word .ch,
+  .hd-logo:not(.rt-anim) .hd-logo-tag .ch { opacity: 1; }
 }
 .hd-nav{display:flex;gap:4px;justify-self:center;}
 .hd-nav a{font-size:14px;font-weight:600;color:var(--ink-700);padding:8px 14px;border-radius:6px;transition:background 160ms,color 160ms;}
@@ -1078,11 +1096,55 @@ a.proj:hover .proj-title{color:var(--accent-ink);}
 
   <script>
   // Logo animation: the new SVG self-animates on render via embedded keyframes
-  // and SMIL gradient color shifts. JS just flags ancestors so dependent
-  // animations (hero accent, etc.) can hook into the same .rt-anim signal.
+  // and SMIL gradient color shifts. JS handles the wordmark/tagline:
+  //  1) splits text into per-letter spans
+  //  2) injects randomized --from (start position) and --rot (rotation) per letter
+  //  3) staggers animation-delay per letter
+  //  4) adds .rt-anim to trigger the eject animation
   (function(){
     var logo = document.querySelector('.hd-logo');
-    if (logo) logo.classList.add('rt-anim');
+    if (!logo) return;
+
+    // Split a text node into per-character spans inside its parent.
+    // Preserves spaces as separate .sp spans for proper spacing.
+    function splitTextElement(el){
+      if (!el) return;
+      var text = el.textContent;
+      var html = '';
+      for (var i = 0; i < text.length; i++){
+        var c = text[i];
+        if (c === ' ') {
+          html += '<span class="sp"></span>';
+        } else {
+          html += '<span class="ch">' + c + '</span>';
+        }
+      }
+      el.innerHTML = html;
+    }
+
+    // Apply randomized start position, rotation, and staggered delay
+    function setupEject(parent, stagger, startDelay){
+      var chs = parent.querySelectorAll('.ch');
+      chs.forEach(function(ch, i){
+        var x = (Math.random() - 0.5) * 600;
+        var y = (Math.random() - 0.5) * 400 - 100;
+        var rot = (Math.random() - 0.5) * 360;
+        ch.style.setProperty('--from', 'translate(' + x + 'px,' + y + 'px)');
+        ch.style.setProperty('--rot', rot + 'deg');
+        ch.style.animationDelay = (startDelay + i * stagger) + 's';
+      });
+    }
+
+    var word = logo.querySelector('.hd-logo-word');
+    var tag = logo.querySelector('.hd-logo-tag');
+    splitTextElement(word);
+    splitTextElement(tag);
+
+    // Wordmark starts at 1.4s (after the SVG mark settles), tagline 0.95s after wordmark begins
+    setupEject(word, 0.06, 1.4);
+    setupEject(tag, 0.025, 2.35);
+
+    logo.classList.add('rt-anim');
     document.body.classList.add('rt-anim');
   })();
 
